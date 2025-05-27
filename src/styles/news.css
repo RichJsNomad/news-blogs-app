@@ -13,6 +13,56 @@
   min-height: 7rem;
   background-color: #111214;
   border-radius: 1rem 1rem 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5rem;
+}
+.logo {
+  font-family: sans-serif;
+  font-size: 5rem;
+  color: lightblue;
+}
+
+.search-bar {
+  position: relative;
+}
+
+.search-bar input {
+  width: 25rem;
+  height: 4rem;
+  background-color: #060709;
+  border: none;
+  border-radius: 5rem;
+  padding: 0 4rem 0 2rem;
+  color: white;
+  font-size: 2rem;
+  transition: width 0.3s;
+}
+.search-bar input::placeholder {
+  color: lightblue;
+  font-size: 2rem;
+}
+.search-bar input:focus {
+  width: 35rem;
+}
+
+.search-bar input:focus::placeholder {
+  color: transparent;
+}
+
+.search-bar button {
+  background-color: transparent;
+  color: lightblue;
+  height: 4rem;
+  width: 4rem;
+  border: none;
+  cursor: pointer;
+  font-size: 2rem;
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
 }
 
 .news-content {
