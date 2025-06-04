@@ -23,10 +23,16 @@ const News = () => {
   const [headline, setHeadline] = useState(null);
   const [news, setNews] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("general");
+  const [searchInput, setSearchInput] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchNews = async () => {
-      const url = ` https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=ru&apikey=d95e47bdc2b24479dd044588bf1ab729`;
+      let url = ` https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=ru&apikey=d95e47bdc2b24479dd044588bf1ab729`;
+
+      if (searchQuery) {
+        url = ` https://gnews.io/api/v4/search?q=${searchQuery}&lang=ru&apikey=d95e47bdc2b24479dd044588bf1ab729`;
+      }
 
       const response = await axios.get(url);
       const fetchedNews = response.data.articles;
@@ -43,11 +49,17 @@ const News = () => {
     };
 
     fetchNews();
-  }, [selectedCategory]);
+  }, [selectedCategory, searchQuery]);
 
   const handleClickCategory = (e, category) => {
     e.preventDefault();
     setSelectedCategory(category);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearchQuery(searchInput);
+    setSearchInput("");
   };
 
   return (
@@ -55,8 +67,13 @@ const News = () => {
       <header className="news-header">
         <h1 className="logo">Новости & Блоги</h1>
         <div className="search-bar">
-          <form>
-            <input type="text" placeholder="Поиск . . ." />
+          <form onSubmit={handleSearch}>
+            <input
+              type="text"
+              placeholder="Поиск . . ."
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+            />
             <button type="submit">
               <i className="fas fa-search"></i>
             </button>
