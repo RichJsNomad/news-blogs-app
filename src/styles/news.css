@@ -169,7 +169,7 @@
   left: 0;
   padding: 1rem 4rem 1rem 1rem;
   font-family: "Bebas Neue", sans-serif;
-  font-size: clamp(1.3rem, 2.5cqi, 1.6rem);
+  font-size: clamp(1rem, 2.5cqi, 1.3rem);
   letter-spacing: 0.2rem;
   color: #fff;
   background-color: rgba(0, 0, 0, 0.7);
@@ -182,6 +182,8 @@
   bottom: 1rem;
   right: 1rem;
   cursor: pointer;
+  color: green;
+  font-size: 1.2rem;
 }
 
 .news-grid {
@@ -216,16 +218,18 @@
 
 .news-grid-item h3 {
   position: absolute;
-  font-size: 1.2rem;
+  font-size: 1rem;
   bottom: 0;
   left: 0;
   font-weight: 100;
   font-family: sans-serif;
   padding: 0.5rem 0.5rem;
-  line-height: 1.5rem;
+
   background-color: rgba(0, 0, 0, 0.7);
   width: 100%;
+
   border-radius: 0 0 1rem 1rem;
+  padding-right: 3rem;
 }
 
 .my-blogs {

@@ -1,31 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Weather from "./Weather";
 import Calendar from "./Calendar";
 import "../styles/news.css";
 import userPhoto from "../assets/images/profile-photo.jpg";
-import techImage from "../assets/images/tech.jpg";
-import sportsImage from "../assets/images/sports.jpg";
-import scienceImage from "../assets/images/science.jpg";
-import worldImage from "../assets/images/world.jpg";
-import healthImage from "../assets/images/health.jpg";
-import nationImage from "../assets/images/nation.jpg";
+import defaultImg from "../assets/images/defaultImg.jpg";
+
 import axios from "axios";
+
+const categories = [
+  "general",
+  "world",
+  "business",
+  "technology",
+  "entertainment",
+  "sports",
+  "science",
+  "health",
+  "nation",
+];
 
 const News = () => {
   const [headline, setHeadline] = useState(null);
   const [news, setNews] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("general");
 
   useEffect(() => {
-    const url = `https://gnews.io/api/v4/search?q=example&apikey=d95e47bdc2b24479dd044588bf1ab729`;
-  }, []);
+    const fetchNews = async () => {
+      const url = ` https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=ru&apikey=d95e47bdc2b24479dd044588bf1ab729`;
+
+      const response = await axios.get(url);
+      const fetchedNews = response.data.articles;
+
+      fetchedNews.forEach((article) => {
+        if (!article.image) {
+          article.image = defaultImg;
+        }
+      });
+
+      setHeadline(fetchedNews[0]);
+      setNews(fetchedNews.slice(1, 7));
+      console.log(fetchedNews[0]);
+    };
+
+    fetchNews();
+  }, [selectedCategory]);
+
+  const handleClickCategory = (e, category) => {
+    e.preventDefault();
+    setSelectedCategory(category);
+  };
 
   return (
     <div className="news">
       <header className="news-header">
-        <h1 className="logo">News & Blogs</h1>
+        <h1 className="logo">Новости & Блоги</h1>
         <div className="search-bar">
           <form>
-            <input type="text" placeholder="Search . . ." />
+            <input type="text" placeholder="Поиск . . ." />
             <button type="submit">
               <i className="fas fa-search"></i>
             </button>
@@ -36,107 +67,115 @@ const News = () => {
         <div className="navbar">
           <div className="user">
             <img src={userPhoto} alt="User Img" />
-            <p>RichJsNomad's Blog</p>
+            <p>RichJsNomad Блог</p>
           </div>
           <nav className="categories">
-            <h1 className="nav-heading">Categories</h1>
+            <h1 className="nav-heading">Категории</h1>
             <div className="nav-links">
-              <a href="" className="nav-link">
-                General
+              <a
+                href=""
+                className="nav-link"
+                onCklick={(e) => handleClickCategory(e, "general")}
+              >
+                Общее
+              </a>
+              <a
+                href=""
+                className="nav-link"
+                onClick={(e) => handleClickCategory(e, "world")}
+              >
+                В мире
+              </a>
+              <a
+                href=""
+                className="nav-link"
+                onClick={(e) => handleClickCategory(e, "business")}
+              >
+                Бизнес
+              </a>
+              <a
+                href=""
+                className="nav-link"
+                onClick={(e) => handleClickCategory(e, "technology")}
+              >
+                Технологии
+              </a>
+              <a
+                href=""
+                className="nav-link"
+                onClick={(e) => handleClickCategory(e, "entertainment")}
+              >
+                Развлечения
+              </a>
+              <a
+                href=""
+                className="nav-link"
+                onClick={(e) => handleClickCategory(e, "sports")}
+              >
+                Спорт
+              </a>
+              <a
+                href=""
+                className="nav-link"
+                onClick={(e) => handleClickCategory(e, "science")}
+              >
+                Наука
+              </a>
+              <a
+                href=""
+                className="nav-link"
+                onClick={(e) => handleClickCategory(e, "health")}
+              >
+                Здоровье
+              </a>
+              <a
+                href=""
+                className="nav-link"
+                onClick={(e) => handleClickCategory(e, "nation")}
+              >
+                Общество
               </a>
               <a href="" className="nav-link">
-                World
-              </a>
-              <a href="" className="nav-link">
-                Business
-              </a>
-              <a href="" className="nav-link">
-                Technology
-              </a>
-              <a href="" className="nav-link">
-                Entartainment
-              </a>
-              <a href="" className="nav-link">
-                Sports
-              </a>
-              <a href="" className="nav-link">
-                Science
-              </a>
-              <a href="" className="nav-link">
-                Health
-              </a>
-              <a href="" className="nav-link">
-                Nation
-              </a>
-              <a href="" className="nav-link">
-                Bookmarks <i className="fa-regular fa-bookmark"></i>
+                Закладки <i className="fa-regular fa-bookmark"></i>
               </a>
             </div>
           </nav>
         </div>
         <div className="news-section">
           <div className="headline">
-            <img src={techImage} alt="headline img" />
-            <h2 className="headline-title">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Aspernatur, est?
-              <i className="fa-regular fa-bookmark bookmark"></i>
-            </h2>
+            <img
+              src={headline?.image || defaultImg}
+              alt={headline?.title}
+              onError={(e) => (e.currentTarget.src = defaultImg)}
+            />
+            <h2 className="headline-title">{headline?.title}</h2>
+            <i className="fa-regular fa-bookmark bookmark"></i>
           </div>
           <div className="news-grid">
-            <div className="news-grid-item">
-              <img src={techImage} alt="sports Image" />
-              <h3>
-                Lorem ipsum dolor sit amet.{" "}
-                <i className="fa-regular fa-bookmark bookmark"></i>
-              </h3>
-            </div>
-            <div className="news-grid-item">
-              <img src={sportsImage} alt="sports Image" />
-              <h3>
-                Lorem ipsum dolor sit amet.{" "}
-                <i className="fa-regular fa-bookmark bookmark"></i>
-              </h3>
-            </div>
-            <div className="news-grid-item">
-              <img src={scienceImage} alt="science Image" />
-              <h3>
-                Lorem ipsum dolor sit amet.{" "}
-                <i className="fa-regular fa-bookmark bookmark"></i>
-              </h3>
-            </div>
-            <div className="news-grid-item">
-              <img src={worldImage} alt="world Image" />
-              <h3>
-                Lorem ipsum dolor sit amet.{" "}
-                <i className="fa-regular fa-bookmark bookmark"></i>
-              </h3>
-            </div>
-            <div className="news-grid-item">
-              <img src={healthImage} alt="health Image" />
-              <h3>
-                Lorem ipsum dolor sit amet.{" "}
-                <i className="fa-regular fa-bookmark bookmark"></i>
-              </h3>
-            </div>
-            <div className="news-grid-item">
-              <img src={nationImage} alt="nation Image" />
-              <h3>
-                Lorem ipsum dolor sit amet.{" "}
-                <i className="fa-regular fa-bookmark bookmark"></i>
-              </h3>
-            </div>
+            {news.map((article, index) => (
+              <div className="news-grid-item" key={index}>
+                <img
+                  src={article?.image || defaultImg}
+                  alt={article?.title}
+                  onError={(e) => (e.currentTarget.src = defaultImg)}
+                />
+                <h3>
+                  {article?.title}
+                  <i className="fa-regular fa-bookmark bookmark"></i>
+                </h3>
+              </div>
+            ))}
           </div>
         </div>
-        <div className="my-blogs">My blogs</div>
+        <div className="my-blogs">Мои Блоги</div>
         <div className="weather-calendar">
           <Weather />
           <Calendar />
         </div>
       </div>
       <footer className="news-footer">
-        <h3>©All rights reserved 2025</h3>
-        <h3>Created by @RichJsNomad</h3>
+        <h3>©Все права защищены 2025</h3>
+        <h3>Создано @RichJsNomad-ом</h3>
       </footer>
     </div>
   );
