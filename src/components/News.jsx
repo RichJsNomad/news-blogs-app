@@ -4,6 +4,7 @@ import Calendar from "./Calendar";
 import "../styles/news.css";
 import userPhoto from "../assets/images/profile-photo.jpg";
 import defaultImg from "../assets/images/defaultImg.jpg";
+import NewsModal from "./NewsModal";
 
 import axios from "axios";
 
@@ -184,6 +185,7 @@ const News = () => {
             ))}
           </div>
         </div>
+        <NewsModal />
         <div className="my-blogs">Мои Блоги</div>
         <div className="weather-calendar">
           <Weather />

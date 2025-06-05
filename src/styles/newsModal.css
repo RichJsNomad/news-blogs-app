@@ -1,0 +1,69 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 60rem;
+  height: auto;
+  max-height: 100%;
+  background-color: rgb(33, 33, 33);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 3rem 4rem rgba(0, 0, 0, 0.7);
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 2rem;
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+.modal-image {
+  width: 100%;
+  height: auto;
+  max-height: 20rem;
+  object-fit: cover;
+  border-radius: 1rem;
+  margin-top: 3rem;
+}
+
+.modal-title {
+  font-family: "Bebas Neueu", sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.1rem;
+  margin-top: 1rem;
+  color: lightskyblue;
+}
+
+.modal-source,
+.modal-date {
+  font-size: 1.2rem;
+  font-family: "Comfortaa", sans-serif;
+  margin-top: 0.7rem;
+}
+
+.modal-content-text {
+  font-size: 1.7rem;
+  margin-top: 1rem;
+  line-height: 1.5rem;
+}
+
+.read-more-link {
+  letter-spacing: 0.3rem;
+  color: green;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  font-size: 1.8rem;
+  display: inline-block;
+  width: 15rem;
+}
