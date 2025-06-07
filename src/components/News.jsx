@@ -26,6 +26,8 @@ const News = () => {
   const [selectedCategory, setSelectedCategory] = useState("general");
   const [searchInput, setSearchInput] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [selectedArticle, setSelectedArticle] = useState(null);
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -63,6 +65,11 @@ const News = () => {
     setSearchInput("");
   };
 
+  const handleArticle = (article) => {
+    setSelectedArticle(article);
+    setShowModal(true);
+  };
+
   return (
     <div className="news">
       <header className="news-header">
@@ -84,16 +91,19 @@ const News = () => {
       <div className="news-content">
         <div className="navbar">
           <div className="user">
-            <img src={userPhoto} alt="User Img" />
-            <p>RichJsNomad Блог</p>
+            <a href="https://www.instagram.com/richjsnomad/" target="blank">
+              <img src={userPhoto} alt="User Img" />
+              <p>RichJsNomad Блог</p>
+            </a>
           </div>
+
           <nav className="categories">
             <h1 className="nav-heading">Категории</h1>
             <div className="nav-links">
               <a
                 href=""
                 className="nav-link"
-                onCklick={(e) => handleClickCategory(e, "general")}
+                onClick={(e) => handleClickCategory(e, "general")}
               >
                 Общее
               </a>
@@ -160,7 +170,7 @@ const News = () => {
           </nav>
         </div>
         <div className="news-section">
-          <div className="headline">
+          <div className="headline" onClick={() => handleArticle(headline)}>
             <img
               src={headline?.image || defaultImg}
               alt={headline?.title}
@@ -171,7 +181,11 @@ const News = () => {
           </div>
           <div className="news-grid">
             {news.map((article, index) => (
-              <div className="news-grid-item" key={index}>
+              <div
+                className="news-grid-item"
+                key={index}
+                onClick={() => handleArticle(article)}
+              >
                 <img
                   src={article?.image || defaultImg}
                   alt={article?.title}
@@ -185,7 +199,11 @@ const News = () => {
             ))}
           </div>
         </div>
-        <NewsModal />
+        <NewsModal
+          show={showModal}
+          article={selectedArticle}
+          onClose={() => setShowModal(false)}
+        />
         <div className="my-blogs">Мои Блоги</div>
         <div className="weather-calendar">
           <Weather />

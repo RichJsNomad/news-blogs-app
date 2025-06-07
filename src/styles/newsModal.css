@@ -67,3 +67,7 @@
   display: inline-block;
   width: 15rem;
 }
+
+.read-more-link:active {
+  transform: translateY(0.1rem);
+}

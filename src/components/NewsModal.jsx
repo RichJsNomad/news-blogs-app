@@ -2,23 +2,31 @@ import React from "react";
 import demoImg from "../assets/images/demo.jpg";
 import "../styles/newsModal.css";
 
-const NewsModal = () => {
+const NewsModal = ({ show, article, onClose }) => {
+  if (!show) {
+    return null;
+  }
+
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <span className="close-button">
+        <span className="close-button" onClick={() => onClose()}>
           <i className="fa-solid fa-xmark"></i>
         </span>
-        <img src={demoImg} alt="modal-image" className="modal-image" />
-        <h2 className="modal-title">
-          Главные новости недели о спорте, политике, программировании и прочем
-        </h2>
-        <p className="modal-source">Source: the Guardian</p>
-        <p className="modal-date">Mar 15, 1994, 6:50 PM</p>
-        <p className="modal-content-text">
-          Главные новости недели о спорте, политике, программировании и прочем
+        <img src={article?.image} alt="modal-image" className="modal-image" />
+        <h2 className="modal-title">{article?.title}</h2>
+        <p className="modal-source">{article?.source.name}</p>
+        <p className="modal-date">
+          {new Date(article?.publishedAt).toLocaleString("ru-Ru", {
+            month: "short",
+            day: "2-digit",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
         </p>
-        <a href="" className="read-more-link">
+        <p className="modal-content-text">{article?.description}</p>
+        <a href={article?.url} className="read-more-link" target="blank">
           Подробнее
         </a>
       </div>

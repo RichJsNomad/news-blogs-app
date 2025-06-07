@@ -16,11 +16,31 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 5rem;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+.news-header:hover {
+  background-color: rgb(2, 29, 50);
 }
 .logo {
   font-family: sans-serif;
   font-size: 4rem;
   color: lightblue;
+  letter-spacing: 0.2rem;
+  animation: colorPulse 2s infinite;
+}
+
+@keyframes colorPulse {
+  0% {
+    color: lightblue;
+  }
+  50% {
+    color: rgb(4, 102, 249);
+  }
+
+  100% {
+    color: lightblue;
+  }
 }
 
 .search-bar {
@@ -89,6 +109,12 @@
   row-gap: 1rem;
   cursor: pointer;
   font-size: 1.5rem;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.user:hover {
+  background-color: green;
+  opacity: 0.9;
 }
 .user img {
   width: 6.5rem;
@@ -101,6 +127,14 @@
   font-family: "Comfortaa", sans-serif;
   font-size: 1.4rem;
   color: #ddd;
+}
+
+.user a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 .categories {
@@ -127,7 +161,7 @@
 .nav-links {
   display: flex;
   flex-direction: column;
-  row-gap: 0.5rem;
+  row-gap: 0.8rem;
 }
 
 .nav-link {
@@ -135,7 +169,18 @@
   color: #ddd;
   text-transform: uppercase;
   letter-spacing: 0.1rem;
+  transition: transform 0.2s ease, color 0.2s ease, active 0.1s ease;
 }
+
+.nav-link:hover {
+  transform: scale(1.07);
+  color: green;
+}
+.nav-link:active {
+  transform: scale(1.05);
+  color: darkgreen;
+}
+
 .nav-link i {
   font-size: 1.2rem;
 }
@@ -153,6 +198,12 @@
   border-radius: 1rem;
   margin-bottom: 2rem;
   position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.headline:hover {
+  transform: scale(1.08);
 }
 
 .headline img {
@@ -206,6 +257,13 @@
   min-height: 8rem;
   border-radius: 1rem;
   position: relative;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.news-grid-item:hover {
+  transform: scale(1.07);
+  z-index: 100;
 }
 
 .news-grid-item img {
@@ -230,6 +288,12 @@
 
   border-radius: 0 0 1rem 1rem;
   padding-right: 3rem;
+  max-height: 5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
 }
 
 .my-blogs {
