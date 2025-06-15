@@ -3,8 +3,9 @@ import Weather from "./Weather";
 import Calendar from "./Calendar";
 import "../styles/news.css";
 import userPhoto from "../assets/images/profile-photo.jpg";
-import defaultImg from "../assets/images/defaultImg.jpg";
+import defaultImg from "../assets/images/defaultImg.webP";
 import NewsModal from "./NewsModal";
+import Bookmark from "./Bookmark";
 
 import axios from "axios";
 
@@ -204,6 +205,7 @@ const News = () => {
           article={selectedArticle}
           onClose={() => setShowModal(false)}
         />
+        <Bookmark />
         <div className="my-blogs">Мои Блоги</div>
         <div className="weather-calendar">
           <Weather />
