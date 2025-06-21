@@ -29,6 +29,8 @@ const News = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [selectedArticle, setSelectedArticle] = useState(null);
+  const [bookmarks, setBookmarks] = useState([]);
+  const [showBookmarkModal, setShowBookmarkModal] = useState(false);
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -69,6 +71,14 @@ const News = () => {
   const handleArticle = (article) => {
     setSelectedArticle(article);
     setShowModal(true);
+  };
+
+  const handleBookmarkClick = (article) => {
+    if (bookmarks.some((item) => item.title === article.title)) {
+      setBookmarks(bookmarks.filter((item) => item.title !== article.title));
+    } else {
+      setBookmarks([...bookmarks, article]);
+    }
   };
 
   return (
@@ -164,8 +174,15 @@ const News = () => {
               >
                 Общество
               </a>
-              <a href="" className="nav-link">
-                Закладки <i className="fa-regular fa-bookmark"></i>
+              <a
+                href="#"
+                className="nav-link"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowBookmarkModal(true);
+                }}
+              >
+                Закладки <i className="fa-solid fa-bookmark"></i>
               </a>
             </div>
           </nav>
@@ -178,7 +195,17 @@ const News = () => {
               onError={(e) => (e.currentTarget.src = defaultImg)}
             />
             <h2 className="headline-title">{headline?.title}</h2>
-            <i className="fa-regular fa-bookmark bookmark"></i>
+            <i
+              className={`${
+                bookmarks.some((bookmark) => bookmark.title === headline?.title)
+                  ? "fa-solid"
+                  : "fa-regular"
+              } fa-bookmark bookmark`}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleBookmarkClick(headline);
+              }}
+            ></i>
           </div>
           <div className="news-grid">
             {news.map((article, index) => (
@@ -194,7 +221,19 @@ const News = () => {
                 />
                 <h3>
                   {article?.title}
-                  <i className="fa-regular fa-bookmark bookmark"></i>
+                  <i
+                    className={`${
+                      bookmarks.some(
+                        (bookmark) => bookmark.title === article.title
+                      )
+                        ? "fa-solid"
+                        : "fa-regular"
+                    } fa-bookmark bookmark`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleBookmarkClick(article);
+                    }}
+                  ></i>
                 </h3>
               </div>
             ))}
@@ -205,7 +244,13 @@ const News = () => {
           article={selectedArticle}
           onClose={() => setShowModal(false)}
         />
-        <Bookmark />
+        <Bookmark
+          show={showBookmarkModal}
+          bookmarks={bookmarks}
+          onClose={() => setShowBookmarkModal(false)}
+          onSelectArticle={handleArticle}
+          onDeleteBookmark={handleBookmarkClick}
+        />
         <div className="my-blogs">Мои Блоги</div>
         <div className="weather-calendar">
           <Weather />
