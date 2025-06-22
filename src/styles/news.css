@@ -261,7 +261,7 @@
   min-height: 8rem;
   border-radius: 1rem;
   position: relative;
-  transition: transform 0.2s ease;
+  transition: transform 0.15s ease;
   cursor: pointer;
 }
 

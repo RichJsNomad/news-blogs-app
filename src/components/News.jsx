@@ -51,7 +51,9 @@ const News = () => {
 
       setHeadline(fetchedNews[0]);
       setNews(fetchedNews.slice(1, 7));
-      console.log(fetchedNews[0]);
+      const savedBookmarks =
+        JSON.parse(localStorage.getItem("bookmarks")) || [];
+      setBookmarks(savedBookmarks);
     };
 
     fetchNews();
@@ -76,8 +78,16 @@ const News = () => {
   const handleBookmarkClick = (article) => {
     if (bookmarks.some((item) => item.title === article.title)) {
       setBookmarks(bookmarks.filter((item) => item.title !== article.title));
+      localStorage.setItem(
+        "bookmarks",
+        JSON.stringify(bookmarks.filter((item) => item.title !== article.title))
+      );
     } else {
       setBookmarks([...bookmarks, article]);
+      localStorage.setItem(
+        "bookmarks",
+        JSON.stringify([...bookmarks, article])
+      );
     }
   };
 
