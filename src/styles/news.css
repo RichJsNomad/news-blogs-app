@@ -27,7 +27,7 @@
   font-size: 4rem;
   color: lightblue;
   letter-spacing: 0.2rem;
-  animation: colorPulse 2s infinite;
+  animation: colorPulse 1.5s infinite;
 }
 
 @keyframes colorPulse {
