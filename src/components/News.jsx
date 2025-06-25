@@ -114,7 +114,7 @@ const News = () => {
           <div className="user">
             <a href="https://www.instagram.com/richjsnomad/" target="blank">
               <img src={userPhoto} alt="User Img" />
-              <p>RichJsNomad Блог</p>
+              <p>RichJsNomad's Insta</p>
             </a>
           </div>
 

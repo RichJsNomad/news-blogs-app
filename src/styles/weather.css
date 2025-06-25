@@ -91,6 +91,68 @@
 
 .weather-data i.bxs-sun {
   color: yellow;
+  animation: iconPulse 1.5s infinite;
+}
+
+@keyframes iconPulse {
+  0% {
+    color: yellow;
+  }
+  50% {
+    color: orange;
+  }
+  100% {
+    color: yellow;
+  }
+}
+
+.weather-data i.bxs-cloud-rain {
+  color: white;
+  animation: iconPulseRain 1.5s infinite;
+}
+
+@keyframes iconPulseRain {
+  0% {
+    color: white;
+  }
+  50% {
+    color: lightblue;
+  }
+  100% {
+    color: rgb(171, 171, 254);
+  }
+}
+
+.weather-data i.bxs-cloud {
+  color: white;
+  animation: iconPulseCloud 1.5s infinite;
+}
+
+@keyframes iconPulseCloud {
+  0% {
+    color: white;
+  }
+  50% {
+    color: lightblue;
+  }
+  100% {
+    color: lightcyan;
+  }
+}
+
+.weather-data i.bxs-cloud-rain {
+  color: white;
+  animation: iconPulseLightning 1.5s infinite;
+}
+
+@keyframes iconPulseLightning {
+  0% {
+    color: rgb(90, 84, 84);
+  }
+
+  100% {
+    color: rgb(28, 28, 30);
+  }
 }
 
 .weather-type,
