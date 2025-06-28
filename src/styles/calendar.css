@@ -4,4 +4,84 @@
   height: calc(55% - 2rem);
   background-color: #111214;
   border-radius: 1rem;
+  padding: 2rem;
+  display: grid;
+  place-items: center;
+}
+
+.navigate-date {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+.navigate-date h2 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: lightskyblue;
+}
+
+.buttons {
+  display: flex;
+  column-gap: 1rem;
+  margin-left: auto;
+}
+
+.buttons i {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(202, 196, 196);
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1a59d8;
+}
+
+.weekdays {
+  width: 100%;
+  display: flex;
+
+  font-size: 1.6rem;
+}
+
+.weekdays span {
+  width: calc(100% / 7);
+  font-size: 1.2rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #41506e;
+  letter-spacing: 0.1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.days {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.days span {
+  width: calc(100% / 7);
+  aspect-ratio: 1;
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.current-day {
+  font-size: 1.3rem !important;
+  color: rgb(74, 74, 249);
+  background: linear-gradient(to left, rgb(5, 245, 5), rgb(155, 234, 155));
+  border-radius: 50%;
 }
